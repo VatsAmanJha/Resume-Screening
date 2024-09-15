@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Classification</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f3f4f6, #ffffff);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .header {
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            color: #007bff;
+            margin: 0;
+        }
+        .header p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin: 10px 0 0;
+        }
+        .form-container {
+            margin-bottom: 30px;
+        }
+        .form-container h2 {
+            font-size: 1.8rem;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .form-container input[type="file"] {
+            border: 1px solid #ced4da;
+            padding: 15px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 600px;
+            background-color: #f8f9fa;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .form-container input[type="file"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .form-container button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            background-color: #007bff;
+            color: #ffffff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .result-container {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #e9ecef;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .result-container h2 {
+            font-size: 1.8rem;
+            color: #343a40;
+            margin-top: 0;
+        }
+        .result-container p {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .form-container input[type="file"],
+            .form-container button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Resume Classification</h1>
+            <p>Upload your resume to receive classification results.</p>
+        </div>
+        <div class="form-container">
+            <h2>Upload Resume</h2>
+            <form action="/evaluate/" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".pdf" required>
+                <button type="submit">Upload and Predict</button>
+            </form>
+        </div>
+        {% if class_name %}
+        <div class="result-container">
+            <h2>Prediction Result</h2>
+            <p><strong>Predicted Class:</strong> {{ class_name }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
